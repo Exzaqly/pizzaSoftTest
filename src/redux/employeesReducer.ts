@@ -188,7 +188,7 @@ export const addEmployee =
     name: string,
     isArchive: boolean,
     birthday: string,
-    role: string,
+    role: RoleType,
     phone: string
   ): Thunk =>
   (dispatch, getState) => {
@@ -202,11 +202,13 @@ type initialStateType = typeof initialState;
 type Actions = InferActionsType<typeof actions>;
 export type Dispatch = ThunkDispatch<AppStateType, any, Actions>;
 
+export type RoleType = 'cook' | 'waiter' | 'driver'
+
 export type NewEmployee = {
   name: string;
   isArchive: boolean;
   birthday: string;
-  role: string;
+  role: RoleType
   phone: string;
 };
 
@@ -215,6 +217,6 @@ export type Employee = {
   name: string;
   isArchive: boolean;
   birthday: string;
-  role: string;
+  role: RoleType
   phone: string;
 };

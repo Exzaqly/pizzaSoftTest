@@ -1,26 +1,25 @@
 import filterReducer, {
   actions,
-  ArchiveFilterType,
-  PositionFilterType,
+  RoleFilterType,
   SortingType,
 } from "./filterReducer";
 
 let state = {
-  positionFilter: "SHOW_DRIVERS" as PositionFilterType,
-  archiveFilter: "SHOW_NOT_ARCHIVED" as ArchiveFilterType,
+  roleFilter: "SHOW_DRIVERS" as RoleFilterType,
+  archiveFilter: false,
   sort: "BY_NAME" as SortingType,
 };
 
 it("Position filter should be changed", () => {
-  let action = actions.setPositionFilterValue("SHOW_COOKS");
+  let action = actions.setRoleFilterValue("SHOW_COOKS");
   let newState = filterReducer(state, action);
-  expect(newState.positionFilter).toBe("SHOW_COOKS");
+  expect(newState.roleFilter).toBe("SHOW_COOKS");
 });
 
 it("Archive filter should be changed", () => {
-  let action = actions.setArchiveFilterValue("SHOW_ARCHIVED");
+  let action = actions.setArchiveFilterValue(true);
   let newState = filterReducer(state, action);
-  expect(newState.archiveFilter).toBe("SHOW_ARCHIVED");
+  expect(newState.archiveFilter).toBeTruthy();
 });
 
 it("sorting method should be changed", () => {

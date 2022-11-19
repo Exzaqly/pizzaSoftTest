@@ -2,10 +2,8 @@ import {AppStateType} from "./store";
 import {createSelector} from "reselect";
 import {Employee} from "./employeesReducer";
 import {
-    archiveFiltering,
-    ArchiveFilterType,
-    positionFiltering,
-    PositionFilterType,
+    roleFiltering,
+    RoleFilterType,
     sortingMethod,
     SortingType,
 } from "./filterReducer";
@@ -17,19 +15,19 @@ dayjs.extend(customParseFormat)
 
 export const employeesSelector = (state: AppStateType) =>
     state.employee.employees;
-export const positionFilterSelector = (state: AppStateType) =>
-    state.filter.positionFilter;
+export const roleFilterSelector = (state: AppStateType) =>
+    state.filter.roleFilter;
 export const archiveFilterSelector = (state: AppStateType) =>
     state.filter.archiveFilter;
 export const sortSelector = (state: AppStateType) => state.filter.sort;
 
 export const getSuitableEmployees = createSelector(
     employeesSelector,
-    positionFilterSelector,
+    roleFilterSelector,
     archiveFilterSelector,
     sortSelector,
-    (employees, positionFilter, archiveFilter, sort) => {
-        const options = {employees, positionFilter, archiveFilter, sort};
+    (employees, roleFilter, archiveFilter, sort) => {
+        const options = {employees, roleFilter, archiveFilter, sort};
         type Options = typeof options;
 
         const {employees: newEmployees} = compose<Options>(
@@ -43,33 +41,33 @@ export const getSuitableEmployees = createSelector(
 
 const getPositionFilteredEmployee = ({
                                          employees,
-                                         positionFilter,
+                                         roleFilter,
                                          ...rest
                                      }: {
     employees: Employee[];
-    positionFilter: PositionFilterType;
+    roleFilter: RoleFilterType;
 }) => {
-    switch (positionFilter) {
-        case positionFiltering.SHOW_DRIVERS: {
+    switch (roleFilter) {
+        case roleFiltering.SHOW_DRIVERS: {
             return {
                 employees: employees.filter((e) => e.role === "driver"),
                 ...rest,
             };
         }
-        case positionFiltering.SHOW_WAITERS: {
+        case roleFiltering.SHOW_WAITERS: {
             return {
                 employees: employees.filter((e) => e.role === "waiter"),
                 ...rest,
             };
         }
-        case positionFiltering.SHOW_COOKS: {
+        case roleFiltering.SHOW_COOKS: {
             return {
                 employees: employees.filter((e) => e.role === "cook"),
                 ...rest,
             };
         }
         default: {
-            throw new Error("Unknown filtering: " + positionFilter);
+            throw new Error("Unknown filtering: " + roleFilter);
         }
     }
 };
@@ -80,16 +78,16 @@ const getArchiveFilteredEmployee = ({
                                         ...rest
                                     }: {
     employees: Employee[];
-    archiveFilter: ArchiveFilterType;
+    archiveFilter: boolean;
 }) => {
     switch (archiveFilter) {
-        case archiveFiltering.SHOW_NOT_ARCHIVED: {
+        case false: {
             return {
                 employees: employees.filter((e) => !e.isArchive),
                 ...rest,
             };
         }
-        case archiveFiltering.SHOW_ARCHIVED: {
+        case true: {
             return {
                 employees: employees.filter((e) => e.isArchive),
                 ...rest,
