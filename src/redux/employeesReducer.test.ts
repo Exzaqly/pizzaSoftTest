@@ -1,4 +1,4 @@
-import employeesReducer, {actions, EmployeeType} from "./employeesReducer";
+import employeesReducer, {actions, Employee} from "./employeesReducer";
 
 let state = {
     employees: [
@@ -42,7 +42,7 @@ let state = {
             phone: "+7 (948) 523-2964",
             birthday: "26.01.1982",
         },
-    ] as EmployeeType[],
+    ] as Employee[],
 };
 
 it('employee should be edit', () => {

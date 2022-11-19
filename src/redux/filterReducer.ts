@@ -14,14 +14,16 @@ export const archiveFiltering = {
   SHOW_NOT_ARCHIVED: "SHOW_NOT_ARCHIVED",
 };
 export const sortingMethod = {
-  BY_BIRTHDAY: "BY_BIRTHDAY",
-  BY_NAME: "BY_NAME",
+  BY_BIRTHDAY_ASCENDING: "BY_BIRTHDAY_ASCENDING",
+  BY_BIRTHDAY_DESCENDING: "BY_BIRTHDAY_DESCENDING",
+  BY_NAME_ASCENDING: "BY_NAME_ASCENDING",
+  BY_NAME_DESCENDING: "BY_NAME_DESCENDING",
 };
 
 let initialState = {
-  positionFilter: positionFiltering.SHOW_DRIVERS as PositionFilterType,
+  positionFilter: positionFiltering.SHOW_COOKS as PositionFilterType,
   archiveFilter: archiveFiltering.SHOW_NOT_ARCHIVED as ArchiveFilterType,
-  sort: sortingMethod.BY_NAME as SortingType,
+  sort: sortingMethod.BY_NAME_ASCENDING as SortingType,
 };
 
 const filterReducer = (

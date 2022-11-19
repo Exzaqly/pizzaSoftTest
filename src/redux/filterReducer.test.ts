@@ -24,7 +24,7 @@ it("Archive filter should be changed", () => {
 });
 
 it("sorting method should be changed", () => {
-  let action = actions.setSortingValue("BY_BIRTHDAY");
+  let action = actions.setSortingValue("BY_BIRTHDAY_ASCENDING");
   let newState = filterReducer(state, action);
   expect(newState.sort).toBe("BY_BIRTHDAY");
 });

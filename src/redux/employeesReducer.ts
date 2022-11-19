@@ -142,7 +142,7 @@ let initialState = {
       phone: "+7 (877) 450-3253",
       birthday: "03.12.1994",
     },
-  ] as EmployeeType[],
+  ] as Employee[],
 };
 
 const employeesReducer = (
@@ -177,11 +177,24 @@ const employeesReducer = (
 };
 
 export const actions = {
-  addEmployee: (employee: EmployeeType) =>
+  addEmployee: (employee: Employee) =>
     ({ type: ADD_EMPLOYEE, payload: employee } as const),
-  editEmployee: (employee: EmployeeType) =>
+  editEmployee: (employee: Employee) =>
     ({ type: EDIT_EMPLOYEE, payload: employee } as const),
 };
+
+export const addEmployee =
+  (
+    name: string,
+    isArchive: boolean,
+    birthday: string,
+    role: string,
+    phone: string
+  ): Thunk =>
+  (dispatch, getState) => {
+    const id = getState().employee.employees.length
+    dispatch(actions.addEmployee({id, name, isArchive, birthday, phone, role}));
+  };
 
 export default employeesReducer;
 type Thunk = BaseThunk<Actions, void>;
@@ -189,7 +202,15 @@ type initialStateType = typeof initialState;
 type Actions = InferActionsType<typeof actions>;
 export type Dispatch = ThunkDispatch<AppStateType, any, Actions>;
 
-export type EmployeeType = {
+export type NewEmployee = {
+  name: string;
+  isArchive: boolean;
+  birthday: string;
+  role: string;
+  phone: string;
+};
+
+export type Employee = {
   id: number;
   name: string;
   isArchive: boolean;
