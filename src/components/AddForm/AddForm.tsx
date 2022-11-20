@@ -1,9 +1,9 @@
 import { FC, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { RoleType } from '../../redux/employeesReducer'
-import { ControllerRenderProps } from 'react-hook-form/dist/types/controller'
 import { IMask, IMaskInput } from 'react-imask'
 import s from './AddForm.module.scss'
+import { Noop } from 'react-hook-form/dist/types'
 
 export const AddForm: FC<Props> = ({
   submitHandler,
@@ -44,7 +44,7 @@ export const AddForm: FC<Props> = ({
             minLength: 17,
           }}
           render={({ field, fieldState }) => (
-            <MaskedPhoneInput defaultValue={phone} {...field} />
+            <MaskedPhoneInput defaultValue={phone} {...field} ref={null} />
           )}
         />
       </div>
@@ -62,7 +62,7 @@ export const AddForm: FC<Props> = ({
             minLength: 10,
           }}
           render={({ field }) => (
-            <MaskedDateInput defaultValue={birthday} {...field} />
+            <MaskedDateInput defaultValue={birthday} {...field} ref={null} />
           )}
         />
       </div>
@@ -99,9 +99,11 @@ export const AddForm: FC<Props> = ({
   )
 }
 
-const MaskedPhoneInput: FC<
-  ControllerRenderProps & { defaultValue?: string }
-> = ({ defaultValue, onChange, ...props }) => {
+const MaskedPhoneInput: FC<InputProps> = ({
+  defaultValue,
+  onChange,
+  ...props
+}) => {
   const [value, setValue] = useState(defaultValue ? defaultValue : '')
   const handleAccept = (v: any) => {
     setValue(v)
@@ -122,9 +124,11 @@ const MaskedPhoneInput: FC<
   )
 }
 
-const MaskedDateInput: FC<
-  ControllerRenderProps & { defaultValue?: string }
-> = ({ defaultValue, onChange, ...props }) => {
+const MaskedDateInput: FC<InputProps> = ({
+  defaultValue,
+  onChange,
+  ...props
+}) => {
   const [value, setValue] = useState(defaultValue ? defaultValue : '')
   const handleAccept = (v: any) => {
     setValue(v)
@@ -158,6 +162,15 @@ const MaskedDateInput: FC<
       value={value}
     />
   )
+}
+
+type InputProps = {
+  defaultValue?: string
+  onChange: (...event: any[]) => void
+  onBlur: Noop
+  value: any
+  name: string
+  ref: null
 }
 
 export type AddFormData = {
