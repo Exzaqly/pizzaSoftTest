@@ -1,0 +1,68 @@
+$border: 1px solid black;
+%employee-attribute {
+  flex-basis: 25%;
+  text-align: center;
+  padding: 8px;
+  border-right: $border;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  .showing {
+    flex-basis: 100%;
+    display: flex;
+    margin-bottom: 30px;
+    margin-top: 30px;
+  }
+
+  .employees {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+  }
+}
+
+.naming {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: 500;
+  border: $border;
+  border-radius: 8px;
+  margin-bottom: 13px;
+}
+
+.employee {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  border: $border;
+  margin-bottom: 13px;
+  border-radius: 8px;
+}
+
+.name {
+  @extend %employee-attribute
+}
+
+.role {
+  @extend %employee-attribute
+}
+
+.phone {
+  @extend %employee-attribute
+}
+
+.birthday {
+  border-right: none;
+  @extend %employee-attribute
+}
+

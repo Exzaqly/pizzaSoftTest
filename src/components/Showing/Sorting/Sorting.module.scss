@@ -1,0 +1,19 @@
+.select{
+  flex-basis: 33%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  select{
+    appearance: none;
+    border-radius: 8px;
+    text-align: center;
+    margin-left: 5px;
+    padding: 5px;
+    outline: none;
+    width: 150px;
+    &:hover{
+      cursor: pointer;
+    }
+  }
+}

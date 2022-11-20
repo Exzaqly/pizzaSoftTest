@@ -1,0 +1,37 @@
+%showing-flex-template {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+}
+
+.filters {
+  flex-basis: 66%;
+  display: flex;
+  justify-content: space-around;
+
+  .select {
+    @extend %showing-flex-template;
+
+    select {
+      appearance: none;
+      border-radius: 8px;
+      text-align: center;
+      margin-left: 5px;
+      padding: 5px;
+      width: 120px;
+      outline: none;
+      &:hover{
+        cursor: pointer;
+      }
+    }
+
+  }
+
+  .checkbox {
+    @extend %showing-flex-template;
+    input{
+      margin-left: 5px;
+    }
+  }
+}
