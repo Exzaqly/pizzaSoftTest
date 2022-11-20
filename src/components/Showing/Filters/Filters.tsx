@@ -1,33 +1,33 @@
-import { ChangeEvent, FC } from "react";
+import { ChangeEvent, FC } from 'react'
 import {
   actions,
   Dispatch,
   roleFiltering,
   RoleFilterType,
-} from "../../../redux/filterReducer";
-import { useDispatch, useSelector } from "react-redux";
-import { archiveFilterSelector } from "../../../redux/selectors";
-import s from "./Filters.module.scss";
+} from '../../../redux/filterReducer'
+import { useDispatch, useSelector } from 'react-redux'
+import { archiveFilterSelector } from '../../../redux/selectors'
+import s from './Filters.module.scss'
 
 export const Filters: FC = () => {
-  const dispatch: Dispatch = useDispatch();
-  const isArchive = useSelector(archiveFilterSelector);
+  const dispatch: Dispatch = useDispatch()
+  const isArchive = useSelector(archiveFilterSelector)
   const showFilteredByRoleHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-    dispatch(actions.setRoleFilterValue(event.target.value as RoleFilterType));
-  };
+    dispatch(actions.setRoleFilterValue(event.target.value as RoleFilterType))
+  }
   const showFilteringByArchiveHandler = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-    dispatch(actions.setArchiveFilterValue(event.target.checked));
-  };
+    dispatch(actions.setArchiveFilterValue(event.target.checked))
+  }
   return (
     <div className={s.filters}>
       <div className={s.select}>
-        <label htmlFor="{'roleSelect'}">Должность </label>
+        <label htmlFor="{'roleSelect'}">Должность</label>
         <select
           defaultValue={roleFiltering.SHOW_COOKS}
           onChange={showFilteredByRoleHandler}
-          id={"roleSelect"}
+          id={'roleSelect'}
         >
           <option value={roleFiltering.SHOW_COOKS}>Повар</option>
           <option value={roleFiltering.SHOW_DRIVERS}>Водитель</option>
@@ -39,15 +39,15 @@ export const Filters: FC = () => {
         <label htmlFor="Archive">В Архиве</label>
         <input
           defaultChecked={isArchive}
-          type={"checkbox"}
-          id={"Archive"}
+          type={'checkbox'}
+          id={'Archive'}
           onChange={showFilteringByArchiveHandler}
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
 type ArchiveForm = {
-  isArchive: boolean;
-};
+  isArchive: boolean
+}

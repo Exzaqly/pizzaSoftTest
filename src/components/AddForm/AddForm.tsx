@@ -1,9 +1,9 @@
-import { FC, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { RoleType } from "../../redux/employeesReducer";
-import { ControllerRenderProps } from "react-hook-form/dist/types/controller";
-import { IMask, IMaskInput } from "react-imask";
-import s from "./AddForm.module.scss";
+import { FC, useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { RoleType } from '../../redux/employeesReducer'
+import { ControllerRenderProps } from 'react-hook-form/dist/types/controller'
+import { IMask, IMaskInput } from 'react-imask'
+import s from './AddForm.module.scss'
 
 export const AddForm: FC<Props> = ({
   submitHandler,
@@ -18,21 +18,21 @@ export const AddForm: FC<Props> = ({
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<AddFormData>();
+  } = useForm<AddFormData>()
   return (
     <form onSubmit={handleSubmit(submitHandler)} className={s.form}>
       <div className={s.block}>
         <label htmlFor="name">Имя сотрудника</label>
         <input
-          {...register("name", {
+          {...register('name', {
             value: name,
             required: true,
           })}
-          id={"name"}
+          id={'name'}
         />
       </div>
 
-      {errors?.name?.type === "required" && <p>Это обязательное поле</p>}
+      {errors?.name?.type === 'required' && <p>Это обязательное поле</p>}
 
       <div className={s.block}>
         <label htmlFor="phone">Телефон</label>
@@ -41,13 +41,17 @@ export const AddForm: FC<Props> = ({
           control={control}
           rules={{
             required: true,
+            minLength: 17,
           }}
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <MaskedPhoneInput defaultValue={phone} {...field} />
           )}
         />
       </div>
-      {errors?.phone?.type === "required" && <p>Это обязательное поле</p>}
+      {errors?.phone?.type === 'required' && <p>Это обязательное поле</p>}
+      {errors?.phone?.type === 'minLength' && (
+        <p>Введите корректный номер телефона</p>
+      )}
       <div className={s.block}>
         <label htmlFor="birthday">Дата рождения</label>
         <Controller
@@ -55,20 +59,24 @@ export const AddForm: FC<Props> = ({
           control={control}
           rules={{
             required: true,
+            minLength: 10,
           }}
           render={({ field }) => (
             <MaskedDateInput defaultValue={birthday} {...field} />
           )}
         />
       </div>
-      {errors?.birthday?.type === "required" && <p>Это обязательное поле</p>}
+      {errors?.birthday?.type === 'required' && <p>Это обязательное поле</p>}
+      {errors?.birthday?.type === 'minLength' && (
+        <p>Введите корректную дату рождения</p>
+      )}
       <div className={s.block}>
         <label htmlFor="select">Должность</label>
         <select
-          {...register("role", {
+          {...register('role', {
             value: role,
           })}
-          id={"select"}
+          id={'select'}
         >
           <option value="cook">Повар</option>
           <option value="waiter">Официант</option>
@@ -76,54 +84,59 @@ export const AddForm: FC<Props> = ({
         </select>
       </div>
       <div className={s.checkbox}>
-        <label htmlFor="isArchive">В архиве</label>
-        <input
-          {...register("isArchive", { value: isArchive })}
-          id={"isArchive"}
-          type={"checkbox"}
-        />
+        Статус
+        <div className={s.checkbox_input}>
+          <label htmlFor="isArchive"> В архиве </label>
+          <input
+            {...register('isArchive', { value: isArchive })}
+            id={'isArchive'}
+            type={'checkbox'}
+          />
+        </div>
       </div>
-      <button type={"submit"}>Подтвердить</button>
+      <button type={'submit'}>Подтвердить</button>
     </form>
-  );
-};
+  )
+}
 
 const MaskedPhoneInput: FC<
   ControllerRenderProps & { defaultValue?: string }
 > = ({ defaultValue, onChange, ...props }) => {
-  const [value, setValue] = useState(defaultValue ? defaultValue : "");
+  const [value, setValue] = useState(defaultValue ? defaultValue : '')
   const handleAccept = (v: any) => {
-    setValue(v);
-    onChange(v);
-  };
+    setValue(v)
+    onChange(v)
+  }
   return (
     <IMaskInput
       {...props}
+      ref={null}
       mask="+7 (000) 000-0000"
-      lazy={false}
+      lazy={true}
       definitions={{
-        "#": /[1-9]/,
+        '#': /[1-9]/,
       }}
       onAccept={handleAccept}
       value={value}
     />
-  );
-};
+  )
+}
 
 const MaskedDateInput: FC<
   ControllerRenderProps & { defaultValue?: string }
 > = ({ defaultValue, onChange, ...props }) => {
-  const [value, setValue] = useState(defaultValue ? defaultValue : "");
+  const [value, setValue] = useState(defaultValue ? defaultValue : '')
   const handleAccept = (v: any) => {
-    setValue(v);
-    onChange(v);
-  };
+    setValue(v)
+    onChange(v)
+  }
 
   return (
     <IMaskInput
       {...props}
-      mask={"DD.MM.YYYY"}
-      lazy={false}
+      ref={null}
+      mask={'DD.MM.YYYY'}
+      lazy={true}
       blocks={{
         YYYY: {
           mask: IMask.MaskedRange,
@@ -144,22 +157,22 @@ const MaskedDateInput: FC<
       onAccept={handleAccept}
       value={value}
     />
-  );
-};
+  )
+}
 
 export type AddFormData = {
-  name: string;
-  phone: string;
-  birthday: string;
-  role: RoleType;
-  isArchive: boolean;
-};
+  name: string
+  phone: string
+  birthday: string
+  role: RoleType
+  isArchive: boolean
+}
 
 type Props = {
-  submitHandler: (data: AddFormData) => void;
-  name?: string;
-  phone?: string;
-  birthday?: string;
-  role?: RoleType;
-  isArchive?: boolean;
-};
+  submitHandler: (data: AddFormData) => void
+  name?: string
+  phone?: string
+  birthday?: string
+  role?: RoleType
+  isArchive?: boolean
+}

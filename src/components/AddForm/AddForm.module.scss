@@ -1,6 +1,5 @@
 
 .form {
-  width: 30%;
   margin-top: 30px;
   margin-left: auto;
   margin-right: auto;
@@ -11,16 +10,19 @@
 
   p {
     color: #bf1650;
+
     &::before {
       display: inline;
       content: "⚠ ";
     }
   }
-  button{
+
+  button {
     padding: 10px;
     background-color: #fff;
     border: 1px solid black;
-    &:hover{
+
+    &:hover {
       cursor: pointer;
       background-color: #FFEBCD;
     }
@@ -40,28 +42,70 @@
       padding: 5px;
       font-size: 16px;
       text-align: center;
+      @media (max-width: 420px) {
+        width: 150px;
+        margin-left: 0;
+      }
     }
 
     select {
       font-size: 16px;
       text-align: center;
       padding: 5px;
-      width: 215px;
+      width: 214px;
       outline: none;
-      &:hover{
+
+      &:hover {
         cursor: pointer;
       }
+
+      @media (max-width: 420px) {
+        width: 164px;
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      margin-right: 0;
+    }
+    @media (max-width: 420px) {
+      width: 300px;
     }
   }
+
   .checkbox {
+    width: 350px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    justify-content: space-between;
+    padding-top: 20px;
+    margin-right: 136px;
     margin-bottom: 20px;
-    font-size: 16px;
-    input {
-      margin-left: 5px;
+
+    &_input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 202px;
+      padding: 5px;
+      font-size: 16px;
+
+      input {
+        margin-left: 5px;
+      }
+
+      @media (max-width: 420px) {
+        width: 152px;
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      margin-right: 0;
+    }
+    @media (max-width: 420px) {
+      width: 300px;
     }
   }
 }
