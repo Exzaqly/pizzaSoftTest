@@ -3,14 +3,13 @@ import { IMask, IMaskInput } from 'react-imask'
 import { InputProps } from './AddForm'
 
 export const MaskedDateInput: FC<InputProps> = ({
-  defaultValue,
-  onChange,
-  ...props
-}) => {
+                                                  defaultValue,
+                                                  onChange,
+                                                  ...props
+                                                }) => {
   const [value, setValue] = useState(defaultValue ? defaultValue : '')
 
   const handleAccept = (v: any) => {
-
     setValue(v)
     onChange(v)
   }

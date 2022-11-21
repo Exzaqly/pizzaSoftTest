@@ -14,14 +14,12 @@ export const Filters: FC = () => {
   const isArchive = useSelector(archiveFilterSelector)
 
   const showFilteredByRoleHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-
     dispatch(actions.setRoleFilterValue(event.target.value as RoleFilterType))
   }
 
   const showFilteringByArchiveHandler = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
-
     dispatch(actions.setArchiveFilterValue(event.target.checked))
   }
 

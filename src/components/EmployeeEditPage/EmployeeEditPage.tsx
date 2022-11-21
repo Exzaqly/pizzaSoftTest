@@ -13,7 +13,6 @@ export const EmployeeEditPage: FC = () => {
   const dispatch: Dispatch = useDispatch()
 
   const editSubmitHandler: SubmitHandler<AddFormData> = (data) => {
-
     dispatch(actions.editEmployee({ id: employee.id, ...data }))
     navigate('/employees')
   }

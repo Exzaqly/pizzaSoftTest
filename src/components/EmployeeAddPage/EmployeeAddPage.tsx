@@ -10,7 +10,6 @@ export const EmployeeAddPage: FC = () => {
   const dispatch: Dispatch = useDispatch()
 
   const addSubmitHandler: SubmitHandler<AddFormData> = (data) => {
-
     dispatch(
       addEmployee(
         data.name,

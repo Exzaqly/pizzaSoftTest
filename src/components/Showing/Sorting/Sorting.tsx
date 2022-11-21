@@ -12,7 +12,6 @@ export const Sorting: FC = () => {
   const dispatch: Dispatch = useDispatch()
 
   const sortingHandle = (event: ChangeEvent<HTMLSelectElement>) => {
-
     dispatch(actions.setSortingValue(event.target.value as SortingType))
   }
 
