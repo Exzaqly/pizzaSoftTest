@@ -1,9 +1,10 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { RoleType } from '../../redux/employeesReducer'
-import { IMask, IMaskInput } from 'react-imask'
 import s from './AddForm.module.scss'
 import { Noop } from 'react-hook-form/dist/types'
+import { MaskedDateInput } from './MaskedDateInput'
+import { MaskedPhoneInput } from './MaskedPhoneInput'
 
 export const AddForm: FC<Props> = ({
   submitHandler,
@@ -19,6 +20,7 @@ export const AddForm: FC<Props> = ({
     control,
     formState: { errors },
   } = useForm<AddFormData>()
+
   return (
     <form onSubmit={handleSubmit(submitHandler)} className={s.form}>
       <div className={s.block}>
@@ -99,72 +101,7 @@ export const AddForm: FC<Props> = ({
   )
 }
 
-const MaskedPhoneInput: FC<InputProps> = ({
-  defaultValue,
-  onChange,
-  ...props
-}) => {
-  const [value, setValue] = useState(defaultValue ? defaultValue : '')
-  const handleAccept = (v: any) => {
-    setValue(v)
-    onChange(v)
-  }
-  return (
-    <IMaskInput
-      {...props}
-      ref={null}
-      mask="+7 (000) 000-0000"
-      lazy={true}
-      definitions={{
-        '#': /[1-9]/,
-      }}
-      onAccept={handleAccept}
-      value={value}
-    />
-  )
-}
-
-const MaskedDateInput: FC<InputProps> = ({
-  defaultValue,
-  onChange,
-  ...props
-}) => {
-  const [value, setValue] = useState(defaultValue ? defaultValue : '')
-  const handleAccept = (v: any) => {
-    setValue(v)
-    onChange(v)
-  }
-
-  return (
-    <IMaskInput
-      {...props}
-      ref={null}
-      mask={'DD.MM.YYYY'}
-      lazy={true}
-      blocks={{
-        YYYY: {
-          mask: IMask.MaskedRange,
-          from: 1900,
-          to: 2022,
-        },
-        MM: {
-          mask: IMask.MaskedRange,
-          from: 1,
-          to: 12,
-        },
-        DD: {
-          mask: IMask.MaskedRange,
-          from: 1,
-          to: 31,
-        },
-      }}
-      onAccept={handleAccept}
-      value={value}
-    />
-  )
-}
-
-type InputProps = {
+export type InputProps = {
   defaultValue?: string
   onChange: (...event: any[]) => void
   onBlur: Noop

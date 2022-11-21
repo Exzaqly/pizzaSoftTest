@@ -4,6 +4,7 @@ import { ThunkDispatch } from 'redux-thunk'
 const SET_ROLE_FILTER_VALUE = 'filter/SET_ROLE_FILTER_VALUE'
 const SET_ARCHIVE_FILTER_VALUE = 'filter/SET_ARCHIVE_FILTER_VALUE'
 const SET_SORTING_VALUE = 'filter/SET_SORTING_VALUE'
+
 export const roleFiltering = {
   SHOW_DRIVERS: 'SHOW_DRIVERS',
   SHOW_WAITERS: 'SHOW_WAITERS',

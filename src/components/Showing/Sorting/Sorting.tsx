@@ -10,9 +10,12 @@ import s from './Sorting.module.scss'
 
 export const Sorting: FC = () => {
   const dispatch: Dispatch = useDispatch()
+
   const sortingHandle = (event: ChangeEvent<HTMLSelectElement>) => {
+
     dispatch(actions.setSortingValue(event.target.value as SortingType))
   }
+
   return (
     <div className={s.select}>
       <label htmlFor="sorting"> Сортировка </label>

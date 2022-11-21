@@ -9,12 +9,15 @@ import { AddForm, AddFormData } from '../AddForm/AddForm'
 export const EmployeeEditPage: FC = () => {
   const navigate = useNavigate()
   const params = useParams() as Params
+  const employee = useSelector(getEmployeeById(+params.id)) as Employee
   const dispatch: Dispatch = useDispatch()
+
   const editSubmitHandler: SubmitHandler<AddFormData> = (data) => {
+
     dispatch(actions.editEmployee({ id: employee.id, ...data }))
     navigate('/employees')
   }
-  const employee = useSelector(getEmployeeById(+params.id)) as Employee
+
   return (
     <AddForm
       submitHandler={editSubmitHandler}

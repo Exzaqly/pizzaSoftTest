@@ -9,6 +9,7 @@ import s from './Employees.module.scss'
 
 export const Employees: FC = () => {
   const employees = useSelector(getSuitableEmployees)
+
   return (
     <div className={s.container}>
       <div className={s.showing}>

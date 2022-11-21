@@ -12,14 +12,19 @@ import s from './Filters.module.scss'
 export const Filters: FC = () => {
   const dispatch: Dispatch = useDispatch()
   const isArchive = useSelector(archiveFilterSelector)
+
   const showFilteredByRoleHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+
     dispatch(actions.setRoleFilterValue(event.target.value as RoleFilterType))
   }
+
   const showFilteringByArchiveHandler = (
     event: ChangeEvent<HTMLInputElement>
   ) => {
+
     dispatch(actions.setArchiveFilterValue(event.target.checked))
   }
+
   return (
     <div className={s.filters}>
       <div className={s.select}>

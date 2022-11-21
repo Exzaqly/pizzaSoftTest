@@ -8,7 +8,9 @@ import { useNavigate } from 'react-router-dom'
 export const EmployeeAddPage: FC = () => {
   const navigate = useNavigate()
   const dispatch: Dispatch = useDispatch()
+
   const addSubmitHandler: SubmitHandler<AddFormData> = (data) => {
+
     dispatch(
       addEmployee(
         data.name,
@@ -20,5 +22,6 @@ export const EmployeeAddPage: FC = () => {
     )
     navigate('/employees')
   }
+
   return <AddForm submitHandler={addSubmitHandler} />
 }

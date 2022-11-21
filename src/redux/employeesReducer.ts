@@ -206,14 +206,6 @@ export type Dispatch = ThunkDispatch<AppStateType, any, Actions>
 
 export type RoleType = 'cook' | 'waiter' | 'driver'
 
-export type NewEmployee = {
-  name: string
-  isArchive: boolean
-  birthday: string
-  role: RoleType
-  phone: string
-}
-
 export type Employee = {
   id: number
   name: string
