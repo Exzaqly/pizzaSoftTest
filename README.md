@@ -1,7 +1,8 @@
 # Тестовое задание для ПиццаСофт
 
-Используемые технологии React, Redux, SCSS, react-router-dom, react-hook-form.  
-Выполнены все пункты задания. Также приложение выдает понятные ошибки пользователю, когда он неправильно заполняет данные сотрудника.
+Используемые технологии: React, Redux, SCSS, react-router-dom, react-hook-form, Jest.
+
+Выполнены все пункты задания. Приложение выдает понятные ошибки пользователю, когда он неправильно заполняет данные сотрудника. Написаны тесты для редьюсеров.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
